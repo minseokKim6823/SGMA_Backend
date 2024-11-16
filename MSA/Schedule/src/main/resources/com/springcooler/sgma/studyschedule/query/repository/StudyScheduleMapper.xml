@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studyschedule.query.repository.StudyScheduleMapper">
+
+    <resultMap id="studySchedule" type="com.springcooler.sgma.studyschedule.query.dto.StudyScheduleDTO">
+        <id property="scheduleId" column="SCHEDULE_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="scheduleStartTime" column="SCHEDULE_START_TIME"/>
+        <result property="scheduleEndTime" column="SCHEDULE_END_TIME"/>
+        <result property="numParticipants" column="NUM_PARTICIPANTS"/>
+        <result property="groupId" column="GROUP_ID"/>
+        <result property="numProblemsPerParticipant" column="NUM_PROBLEMS_PER_PARTICIPANT"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="testStatus" column="TEST_STATUS"/>
+        <result property="testAverage" column="TEST_AVERAGE"/>
+        <result property="testStandardDeviation" column="TEST_STANDARD_DEVIATION"/>
+    </resultMap>
+
+
+    <!-- 스터디 그룹 일정 단건 조회 (Schedule ID로) -->
+    <select id="findStudyScheduleByScheduleId" resultMap="studySchedule">
+        SELECT
+              A.SCHEDULE_ID
+            , A.TITLE
+            , A.CONTENT
+            , A.SCHEDULE_START_TIME
+            , A.SCHEDULE_END_TIME
+            , A.NUM_PARTICIPANTS
+            , A.ACTIVE_STATUS
+            , A.TEST_STATUS
+            , A.TEST_AVERAGE
+            , A.TEST_STANDARD_DEVIATION
+            , A.GROUP_ID
+            , A.NUM_PROBLEMS_PER_PARTICIPANT
+        FROM STUDY_SCHEDULE A
+        WHERE A.SCHEDULE_ID = #{scheduleId}
+    </select>
+
+    <!-- 스터디 그룹 일정 전체 조회 (Group ID로) -->
+    <select id="findStudyScheduleByGroupId" resultMap="studySchedule">
+        SELECT
+              A.SCHEDULE_ID
+            , A.TITLE
+            , A.CONTENT
+            , A.SCHEDULE_START_TIME
+            , A.SCHEDULE_END_TIME
+            , A.NUM_PARTICIPANTS
+            , A.ACTIVE_STATUS
+            , A.TEST_STATUS
+            , A.TEST_AVERAGE
+            , A.TEST_STANDARD_DEVIATION
+            , A.GROUP_ID
+            , A.NUM_PROBLEMS_PER_PARTICIPANT
+        FROM STUDY_SCHEDULE A
+        WHERE A.GROUP_ID = #{groupId}
+        ORDER BY A.SCHEDULE_ID
+    </select>
+
+    <!-- 스터디 그룹 일정 기간별 조회 -->
+    <select id="findStudySchedulesByPeriod" resultMap="studySchedule">
+        SELECT
+              A.SCHEDULE_ID
+            , A.TITLE
+            , A.CONTENT
+            , A.SCHEDULE_START_TIME
+            , A.SCHEDULE_END_TIME
+            , A.NUM_PARTICIPANTS
+            , A.ACTIVE_STATUS
+            , A.TEST_STATUS
+            , A.TEST_AVERAGE
+            , A.TEST_STANDARD_DEVIATION
+            , A.GROUP_ID
+            , A.NUM_PROBLEMS_PER_PARTICIPANT
+        FROM STUDY_SCHEDULE A
+        WHERE A.GROUP_ID = #{groupId} AND
+        A.SCHEDULE_START_TIME >= #{startDate} AND #{endDate} >= A.SCHEDULE_END_TIME
+        ORDER BY A.SCHEDULE_START_TIME
+    </select>
+
+    <!-- 스터디 그룹 일정 시험의 통계 자료 조회 -->
+    <select id="findStudyScheduleByStatistics" resultMap="studySchedule">
+        SELECT
+              A.SCHEDULE_ID
+            , A.TITLE
+            , A.CONTENT
+            , A.SCHEDULE_START_TIME
+            , A.SCHEDULE_END_TIME
+            , A.NUM_PARTICIPANTS
+            , A.ACTIVE_STATUS
+            , A.TEST_STATUS
+            , A.TEST_AVERAGE
+            , A.TEST_STANDARD_DEVIATION
+            , A.GROUP_ID
+            , A.NUM_PROBLEMS_PER_PARTICIPANT
+        FROM STUDY_SCHEDULE A
+        WHERE A.SCHEDULE_ID = #{scheduleId} AND A.TEST_STATUS = 'Y'
+        ORDER BY A.SCHEDULE_ID
+    </select>
+
+    <select id="findParticipantsByScheduleId" parameterType="long" resultType="java.lang.Long">
+        SELECT
+                PARTICIPANT_ID
+          FROM  STUDY_SCHEDULE_PARTICIPANT
+         WHERE  SCHEDULE_ID = #{ scheduleId }
+    </select>
+</mapper>

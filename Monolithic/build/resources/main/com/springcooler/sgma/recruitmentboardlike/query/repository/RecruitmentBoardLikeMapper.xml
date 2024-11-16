@@ -1,0 +1,19 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.springcooler.sgma.recruitmentboardlike.query.repository.RecruitmentBoardLikeMapper">-->
+
+<!--    <resultMap id="recruitmentBoardId1" type="RecruitmentBoardLikeDTO">-->
+<!--        <id property="recruitmentBoardLikeId" column="RECRUITMENT_BOARD_LIKE_ID"/>-->
+<!--    </resultMap>-->
+
+
+<!--    <select id="recruitmentBoardLike" resultMap="recruitmentBoardLike">-->
+<!--        SELECT-->
+<!--            A.USER_ID,-->
+<!--            A.RECRUITMENT_BOARD_ID-->
+<!--        FROM STUDY_GROUP_APPLICANT A-->
+<!--        WHERE A.RECRUITMENT_BOARD_ID = #{ recruitmentBoardId }-->
+<!--    </select>-->
+<!--</mapper>-->

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studyscheduleparticipant.query.repository.StudyScheduleParticipantMapper">
+
+    <!-- 기본적인 StudyScheduleParticipantDTO 매핑 -->
+    <resultMap id="studyScheduleParticipant" type="com.springcooler.sgma.studyscheduleparticipant.query.dto.StudyScheduleParticipantDTO">
+        <id property="participantId" column="PARTICIPANT_ID" />
+        <result property="scheduleId" column="SCHEDULE_ID" />
+        <result property="memberId" column="MEMBER_ID" />
+        <result property="submissionStatus" column="SUBMISSION_STATUS" />
+        <result property="numSubmittedProblems" column="NUM_SUBMITTED_PROBLEMS" />
+        <result property="testScore" column="TEST_SCORE" />
+        <result property="testPercentage" column="TEST_PERCENTAGE" />
+    </resultMap>
+
+    <!-- 스터디 그룹 일정 참가자 조회 -->
+    <select id="findStudyScheduleParticipant" resultMap="studyScheduleParticipant">
+        SELECT
+              A.PARTICIPANT_ID
+            , A.SUBMISSION_STATUS
+            , A.NUM_SUBMITTED_PROBLEMS
+            , A.TEST_SCORE
+            , A.TEST_PERCENTAGE
+            , A.SCHEDULE_ID
+            , A.MEMBER_ID
+        FROM STUDY_SCHEDULE_PARTICIPANT A
+        WHERE A.SCHEDULE_ID = #{scheduleId}
+    </select>
+
+    <!-- 스터디 그룹 일정 참가자 시험 결과 조회 -->
+    <select id="findStudyScheduleParticipantTestResult" resultMap="studyScheduleParticipant">
+        SELECT
+              A.PARTICIPANT_ID
+            , A.SUBMISSION_STATUS
+            , A.NUM_SUBMITTED_PROBLEMS
+            , A.TEST_SCORE
+            , A.TEST_PERCENTAGE
+            , A.SCHEDULE_ID
+            , A.MEMBER_ID
+        FROM STUDY_SCHEDULE_PARTICIPANT A
+        JOIN STUDY_SCHEDULE B ON A.SCHEDULE_ID = B.SCHEDULE_ID
+        WHERE A.MEMBER_ID = #{memberID} AND B.TEST_STATUS = 'Y'
+    </select>
+
+</mapper>

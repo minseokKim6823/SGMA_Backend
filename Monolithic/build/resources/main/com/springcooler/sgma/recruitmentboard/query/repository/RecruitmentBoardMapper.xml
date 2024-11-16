@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.recruitmentboard.query.repository.RecruitmentBoardMapper">
+
+    <resultMap id="studyGroupRecruitment1" type="StudyGroupApplicantDTO">
+        <id property="recruitmentBoardId" column="RECRUITMENT_BOARD_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="recruitmentStartTime" column="RECRUITMENT_START_TIME"/>
+        <result property="recruitmentEndTime" column="RECRUITMENT_END_TIME"/>
+        <result property="likes" column="LIKES"/>
+        <result property="groupId" column="GROUP_ID"/>
+        <result property="studyGroupCategoryId" column="STUDY_GROUP_CATEGORY_ID"/>
+    </resultMap>
+
+    <resultMap id="studyGroupRecruitment2" type="StudyGroupApplicantDTO" extends="studyGroupRecruitment1">
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+    </resultMap>
+
+
+    <select id="studyGroupRecruitment" resultMap="studyGroupRecruitment2">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID
+        FROM RECRUITMENT_BOARD A
+        WHERE A.ACTIVE_STATUS = 'ACTIVE'
+    </select>
+
+
+    <select id="selectStudyGroupApplicantDTO" resultMap="studyGroupRecruitment2" parameterType="long">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID
+        FROM RECRUITMENT_BOARD A
+        WHERE A.RECRUITMENT_BOARD_ID = #{ recruitmentBoardId }
+    </select>
+
+</mapper>

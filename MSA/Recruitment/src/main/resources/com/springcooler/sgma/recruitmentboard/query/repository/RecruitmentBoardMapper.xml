@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.recruitmentboard.query.repository.RecruitmentBoardMapper">
+
+    <resultMap id="studyGroupRecruitment" type="com.springcooler.sgma.recruitmentboard.query.dto.RecruitmentBoardDTO">
+        <id property="recruitmentBoardId" column="RECRUITMENT_BOARD_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="recruitmentStartTime" column="RECRUITMENT_START_TIME"/>
+        <result property="recruitmentEndTime" column="RECRUITMENT_END_TIME"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="likes" column="LIKES"/>
+        <result property="groupId" column="GROUP_ID"/>
+        <result property="studyGroupCategoryId" column="STUDY_GROUP_CATEGORY_ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userNickname" column="USER_NICKNAME"/>
+        <result property="studyGroupCategoryName" column="CATEGORY_NAME"/>
+    </resultMap>
+
+    <select id="findAllRecruitmentBoards" resultMap="studyGroupRecruitment">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID,
+        C.USER_ID,
+        C.nickname AS USER_NICKNAME,
+        D.study_group_category_name AS CATEGORY_NAME
+        FROM RECRUITMENT_BOARD A
+        JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+        JOIN USER C ON B.USER_ID = C.USER_ID
+        LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+        WHERE A.ACTIVE_STATUS != 'DELETED'
+        ORDER BY A.CREATED_AT DESC;
+    </select>
+
+
+    <select id="findRecruitmentBoardByBoardId" resultMap="studyGroupRecruitment" parameterType="Long">
+        SELECT
+            A.RECRUITMENT_BOARD_ID,
+            A.TITLE,
+            A.CONTENT,
+            A.CREATED_AT,
+            A.UPDATED_AT,
+            A.RECRUITMENT_START_TIME,
+            A.RECRUITMENT_END_TIME,
+            A.ACTIVE_STATUS,
+            A.LIKES,
+            A.GROUP_ID,
+            A.STUDY_GROUP_CATEGORY_ID,
+            C.USER_ID,
+            C.nickname AS USER_NICKNAME,
+            D.study_group_category_name AS CATEGORY_NAME
+        FROM (
+            SELECT
+                RECRUITMENT_BOARD_ID,
+                TITLE,
+                CONTENT,
+                CREATED_AT,
+                UPDATED_AT,
+                RECRUITMENT_START_TIME,
+                RECRUITMENT_END_TIME,
+                ACTIVE_STATUS,
+                LIKES,
+                GROUP_ID,
+                STUDY_GROUP_CATEGORY_ID
+            FROM RECRUITMENT_BOARD
+                WHERE RECRUITMENT_BOARD_ID = #{ recruitmentBoardId }
+        ) A
+        JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+        JOIN USER C ON B.USER_ID = C.USER_ID
+        LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+        WHERE A.ACTIVE_STATUS != 'DELETED';
+
+    </select>
+
+
+    <select id="findRecruitmentBoardsByTitle" resultMap="studyGroupRecruitment" parameterType="string">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID,
+        C.USER_ID,
+        C.nickname AS USER_NICKNAME,
+        D.study_group_category_name AS CATEGORY_NAME
+        FROM RECRUITMENT_BOARD A
+        JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+        JOIN USER C ON B.USER_ID = C.USER_ID
+        LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+        WHERE A.ACTIVE_STATUS != 'DELETED' AND A.TITLE LIKE CONCAT('%', #{title}, '%')
+        ORDER BY A.CREATED_AT DESC;
+    </select>
+
+
+    <select id="findRecruitmentBoardsByGroupId" resultMap="studyGroupRecruitment" parameterType="Long">
+    SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID,
+        C.USER_ID,
+        C.nickname AS USER_NICKNAME,
+        D.study_group_category_name AS CATEGORY_NAME
+    FROM RECRUITMENT_BOARD A
+    JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+    JOIN USER C ON B.USER_ID = C.USER_ID
+    LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+    WHERE A.ACTIVE_STATUS != 'DELETED' AND A.GROUP_ID = #{groupId}
+    ORDER BY A.CREATED_AT DESC;
+
+    </select>
+
+    <select id="findRecruitmentBoardsByCategory" resultMap="studyGroupRecruitment" parameterType="Integer">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID
+        C.USER_ID,
+        C.nickname AS USER_NICKNAME,
+        D.study_group_category_name AS CATEGORY_NAME
+        FROM RECRUITMENT_BOARD A
+        JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+        JOIN USER C ON B.USER_ID = C.USER_ID
+        LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+        WHERE A.ACTIVE_STATUS != 'DELETED' AND A.STUDY_GROUP_CATEGORY_ID = #{studyGroupCategoryId}
+        ORDER BY A.CREATED_AT DESC;
+    </select>
+
+    <select id="findTop3MostLikedPostsWithin7Days" resultMap="studyGroupRecruitment">
+        SELECT
+        A.RECRUITMENT_BOARD_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.RECRUITMENT_START_TIME,
+        A.RECRUITMENT_END_TIME,
+        A.ACTIVE_STATUS,
+        A.LIKES,
+        A.GROUP_ID,
+        A.STUDY_GROUP_CATEGORY_ID
+        C.USER_ID,
+        C.nickname AS USER_NICKNAME,
+        D.study_group_category_name AS CATEGORY_NAME
+        FROM RECRUITMENT_BOARD A
+        JOIN STUDY_GROUP B ON A.GROUP_ID = B.GROUP_ID
+        JOIN USER C ON B.USER_ID = C.USER_ID
+        LEFT JOIN STUDY_GROUP_CATEGORY D ON A.STUDY_GROUP_CATEGORY_ID = D.STUDY_GROUP_CATEGORY_ID
+        WHERE A.ACTIVE_STATUS != 'DELETED' AND A.CREATED_AT >= NOW() - INTERVAL 7 DAY
+        ORDER BY A.LIKES DESC
+        LIMIT 3;
+    </select>
+
+
+</mapper>

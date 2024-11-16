@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springcooler.sgma.user.query.repository.RecruitmentCommentMapper">
+
+    <!-- 댓글 조회 -->
+    <select id="findCommentsByUserId" resultType="com.springcooler.sgma.user.query.dto.RecruitmentBoardCommentDTO">
+        SELECT
+        rc.recruitment_board_comment_id AS commentId,
+        rc.content,
+        rc.created_at AS createdAt,
+        rc.updated_at AS updatedAt,
+        rc.active_status AS activeStatus,
+        rc.anonymous_status AS anonymousStatus,
+        rc.user_id AS userId
+        FROM
+        recruitment_board_comment rc
+        WHERE
+        rc.user_id = #{userId}
+        AND rc.active_status = 'ACTIVE'
+    </select>
+
+    <!-- 대댓글 조회 -->
+    <select id="findRepliesByUserId" resultType="com.springcooler.sgma.user.query.dto.RecruitmentBoardReplyDTO">
+        SELECT
+            rr.recruitment_board_reply_id AS replyId,
+            rr.content,
+            rr.created_at AS createdAt,
+            rr.updated_at AS updatedAt,
+            rr.active_status AS activeStatus,
+            rr.anonymous_status AS anonymousStatus,
+            rr.user_id AS userId,
+            rr.recruitment_board_comment_id AS commentId
+        FROM
+            recruitment_board_reply rr
+        WHERE
+            rr.user_id = #{userId}
+          AND rr.active_status = 'ACTIVE'
+    </select>
+
+</mapper>

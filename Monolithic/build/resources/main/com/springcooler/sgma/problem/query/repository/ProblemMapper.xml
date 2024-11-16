@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.problem.query.repository.ProblemMapper">
+    <resultMap id="problemResultMap" type="com.springcooler.sgma.problem.query.dto.ProblemDTO">
+        <id property="problemId" column="problem_id"/>
+        <result property="content" column="content"/>
+        <result property="answer" column="answer"/>
+        <result property="participantId" column="participant_id"/>
+        <result property="scheduleId" column="schedule_id"/>
+    </resultMap>
+
+
+    <resultMap id="problemAndChoiceResultMap" type="com.springcooler.sgma.problem.query.dto.ProblemAndChoiceDTO">
+        <id property="problemId" column="problem_id"/>
+        <result property="participantId" column="participant_id"/>
+        <result property="scheduleId" column="schedule_id"/>
+        <result property="content" column="PROBLEM_CONTENT"/>
+<!--        <result property="answer" column="answer"/>-->
+        <collection property="choices" resultMap="choiceResultMap"/>
+    </resultMap>
+
+    <resultMap id="choiceResultMap" type="com.springcooler.sgma.choice.query.dto.ChoiceDTO">
+        <id property="problemId" column="problem_id"/>
+        <id property="choiceNum" column="choice_num"/>
+<!--    같은 이름의 Column의 충돌을 피하기 위해 Alias 사용  -->
+        <result property="content" column="CHOICE_CONTENT"/>
+    </resultMap>
+
+    <select id="findAllProblems" resultMap="problemResultMap">
+        SELECT
+                A.PROBLEM_ID
+               ,A.CONTENT
+               ,A.ANSWER
+               ,A.PARTICIPANT_ID
+               ,A.SCHEDULE_ID
+          FROM PROBLEM A
+    </select>
+
+    <select id="findProblemsByScheduleId" resultMap="problemResultMap" parameterType="long">
+        SELECT
+                A.PROBLEM_ID
+               ,A.CONTENT
+               ,A.ANSWER
+               ,A.PARTICIPANT_ID
+               ,A.SCHEDULE_ID
+          FROM PROBLEM A
+         WHERE A.SCHEDULE_ID=#{ scheduleId }
+    </select>
+
+    <select id="findProblemsByScheduleIdAndParticipantId" resultMap="problemResultMap" parameterType="hashmap">
+        SELECT
+                A.PROBLEM_ID
+               ,A.CONTENT
+               ,A.ANSWER
+               ,A.PARTICIPANT_ID
+               ,A.SCHEDULE_ID
+          FROM PROBLEM A
+         WHERE A.PARTICIPANT_ID=#{participantId}
+           AND A.SCHEDULE_ID = #{scheduleId}
+    </select>
+
+    <select id="findProblemByProblemId" parameterType="long" resultMap="problemResultMap">
+        SELECT
+                    A.PROBLEM_ID
+                   ,A.CONTENT
+                   ,A.ANSWER
+                   ,A.PARTICIPANT_ID
+                   ,A.SCHEDULE_ID
+        FROM        PROBLEM A
+        WHERE       A.PROBLEM_ID = #{ problemId }
+    </select>
+
+    <select id="findProblemAndChoiceByProblemId" parameterType="long" resultMap="problemAndChoiceResultMap">
+        SELECT
+                    A.PROBLEM_ID
+                   ,A.SCHEDULE_ID
+                   ,A.CONTENT as PROBLEM_CONTENT
+--                    ,A.ANSWER
+                   ,A.PARTICIPANT_ID
+                   ,A.SCHEDULE_ID
+                   ,B.CHOICE_NUM
+                   ,B.CONTENT AS CHOICE_CONTENT
+          FROM      PROBLEM A
+          LEFT JOIN CHOICE B ON(A.PROBLEM_ID = B.PROBLEM_ID)
+         WHERE      A.PROBLEM_ID = #{ problemId }
+    </select>
+</mapper>

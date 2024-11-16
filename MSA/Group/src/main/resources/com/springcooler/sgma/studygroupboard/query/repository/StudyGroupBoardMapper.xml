@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studygroupboard.query.repository.StudyGroupBoardMapper">
+    <resultMap id="studyGroupBoardResultMap" type="com.springcooler.sgma.studygroupboard.query.dto.StudyGroupBoardDTO">
+        <id property="studyGroupBoardId" column="STUDY_GROUP_BOARD_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="likes" column="LIKES"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="groupId" column="GROUP_ID"/>
+    </resultMap>
+
+    <select id="findStudyGroupBoardsByGroupId" resultMap="studyGroupBoardResultMap" parameterType="map">
+        SELECT
+               A.STUDY_GROUP_BOARD_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.LIKES
+             , A.MEMBER_ID
+             , C.NICKNAME
+             , A.GROUP_ID
+          FROM STUDY_GROUP_BOARD A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.MEMBER_ID = B.MEMBER_ID
+          JOIN USER C
+            ON B.USER_ID = C.USER_ID
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId }
+         ORDER BY A.STUDY_GROUP_BOARD_ID DESC
+         LIMIT #{ elementsPerPage } OFFSET #{ offset }
+    </select>
+
+    <select id="findStudyGroupBoardsByMemberId" resultMap="studyGroupBoardResultMap" parameterType="map">
+        SELECT
+               A.STUDY_GROUP_BOARD_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.LIKES
+             , A.MEMBER_ID
+             , C.NICKNAME
+             , A.GROUP_ID
+          FROM STUDY_GROUP_BOARD A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.MEMBER_ID = B.MEMBER_ID
+          JOIN USER C
+            ON B.USER_ID = C.USER_ID
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.MEMBER_ID = #{ memberId }
+         ORDER BY A.STUDY_GROUP_BOARD_ID DESC
+         LIMIT #{ elementsPerPage } OFFSET #{ offset }
+    </select>
+
+    <select id="findStudyGroupBoardsByTitle" resultMap="studyGroupBoardResultMap" parameterType="map">
+        SELECT
+               A.STUDY_GROUP_BOARD_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.LIKES
+             , A.MEMBER_ID
+             , C.NICKNAME
+             , A.GROUP_ID
+          FROM STUDY_GROUP_BOARD A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.MEMBER_ID = B.MEMBER_ID
+          JOIN USER C
+            ON B.USER_ID = C.USER_ID
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId } AND A.TITLE LIKE CONCAT('%', #{ title }, '%')
+         ORDER BY A.STUDY_GROUP_BOARD_ID DESC
+         LIMIT #{ elementsPerPage } OFFSET #{ offset }
+    </select>
+
+    <select id="findStudyGroupBoardsByContent" resultMap="studyGroupBoardResultMap" parameterType="map">
+        SELECT
+               A.STUDY_GROUP_BOARD_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.LIKES
+             , A.MEMBER_ID
+             , C.NICKNAME
+             , A.GROUP_ID
+          FROM STUDY_GROUP_BOARD A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.MEMBER_ID = B.MEMBER_ID
+          JOIN USER C
+            ON B.USER_ID = C.USER_ID
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId } AND A.CONTENT LIKE CONCAT('%', #{ content }, '%')
+         ORDER BY A.STUDY_GROUP_BOARD_ID DESC
+         LIMIT #{ elementsPerPage } OFFSET #{ offset }
+    </select>
+
+    <select id="findStudyGroupBoardByBoardId" resultMap="studyGroupBoardResultMap" parameterType="Long">
+        SELECT
+               A.STUDY_GROUP_BOARD_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.LIKES
+             , A.MEMBER_ID
+             , C.NICKNAME
+             , A.GROUP_ID
+          FROM STUDY_GROUP_BOARD A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.MEMBER_ID = B.MEMBER_ID
+          JOIN USER C
+            ON B.USER_ID = C.USER_ID
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.STUDY_GROUP_BOARD_ID = #{ boardId }
+    </select>
+
+    <select id="getTotalElementsByGroupId" resultType="Integer" parameterType="Long">
+        SELECT
+               COUNT(*) AS TOTAL
+          FROM STUDY_GROUP_BOARD A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId }
+    </select>
+
+    <select id="getTotalElementsByMemberId" resultType="Integer" parameterType="Long">
+        SELECT
+               COUNT(*) AS TOTAL
+          FROM STUDY_GROUP_BOARD A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.MEMBER_ID = #{ memberId }
+    </select>
+
+    <select id="getTotalElementsByTitle" resultType="Integer" parameterType="map">
+        SELECT
+               COUNT(*) AS TOTAL
+          FROM STUDY_GROUP_BOARD A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId } AND A.TITLE LIKE CONCAT('%', #{ title }, '%')
+    </select>
+
+    <select id="getTotalElementsByContent" resultType="Integer" parameterType="map">
+        SELECT
+               COUNT(*) AS TOTAL
+          FROM STUDY_GROUP_BOARD A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId } AND A.CONTENT LIKE CONCAT('%', #{ content }, '%')
+    </select>
+
+</mapper>

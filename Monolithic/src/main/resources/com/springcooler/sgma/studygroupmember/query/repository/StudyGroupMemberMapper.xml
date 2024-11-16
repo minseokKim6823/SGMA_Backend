@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studygroupmember.query.repository.StudyGroupMemberMapper">
+
+    <select id="findStudyGroupMemberByMemberId" parameterType="Long" resultType="com.springcooler.sgma.studygroupmember.query.dto.StudyGroupMemberDTO">
+        SELECT
+               A.MEMBER_ID AS memberId
+             , A.MEMBER_ENROLLED_AT AS memberEnrolledAt
+             , A.MEMBER_WITHDRAWN_AT AS memberWithdrawnAt
+             , A.MEMBER_STATUS AS memberStatus
+             , A.GROUP_ROLE AS groupRole
+             , A.USER_ID AS userId
+             , B.NICKNAME AS nickname
+             , A.GROUP_ID AS groupId
+          FROM STUDY_GROUP_MEMBER A
+          JOIN USER B
+            ON A.USER_ID = B.USER_ID
+         WHERE A.MEMBER_STATUS = 'ACTIVE' AND A.MEMBER_ID = #{ memberId }
+         ORDER BY A.MEMBER_ID
+    </select>
+
+    <select id="findStudyGroupMembersByGroupId" parameterType="Long" resultType="com.springcooler.sgma.studygroupmember.query.dto.StudyGroupMemberDTO">
+        SELECT
+               A.MEMBER_ID AS memberId
+             , A.MEMBER_ENROLLED_AT AS memberEnrolledAt
+             , A.MEMBER_WITHDRAWN_AT AS memberWithdrawnAt
+             , A.MEMBER_STATUS AS memberStatus
+             , A.GROUP_ROLE AS groupRole
+             , A.USER_ID AS userId
+             , B.NICKNAME AS nickname
+             , A.GROUP_ID AS groupId
+          FROM STUDY_GROUP_MEMBER A
+          JOIN USER B
+            ON A.USER_ID = B.USER_ID
+         WHERE A.MEMBER_STATUS = 'ACTIVE' AND A.GROUP_ID = #{ groupId }
+         ORDER BY A.MEMBER_ID
+    </select>
+
+    <select id="findStudyGroupMembersByUserId" parameterType="Long" resultType="com.springcooler.sgma.studygroupmember.query.dto.StudyGroupMemberDTO">
+        SELECT
+               A.MEMBER_ID AS memberId
+             , A.MEMBER_ENROLLED_AT AS memberEnrolledAt
+             , A.MEMBER_WITHDRAWN_AT AS memberWithdrawnAt
+             , A.MEMBER_STATUS AS memberStatus
+             , A.GROUP_ROLE AS groupRole
+             , A.USER_ID AS userId
+             , B.NICKNAME AS nickname
+             , A.GROUP_ID AS groupId
+          FROM STUDY_GROUP_MEMBER A
+          JOIN USER B
+            ON A.USER_ID = B.USER_ID
+         WHERE A.MEMBER_STATUS = 'ACTIVE' AND A.USER_ID = #{ userId }
+         ORDER BY A.MEMBER_ID
+    </select>
+
+</mapper>

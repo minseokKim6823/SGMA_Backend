@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studygroupnotice.query.repository.StudyGroupNoticeMapper">
+    <resultMap id="studyGroupNoticeResultMap" type="com.springcooler.sgma.studygroupnotice.query.dto.StudyGroupNoticeDTO">
+        <id property="noticeId" column="NOTICE_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="groupId" column="GROUP_ID"/>
+    </resultMap>
+
+    <select id="findStudyGroupNoticesByGroupId" resultMap="studyGroupNoticeResultMap" parameterType="Long">
+        SELECT
+               A.NOTICE_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.GROUP_ID
+          FROM STUDY_GROUP_NOTICE A
+         WHERE A.GROUP_ID = #{ groupId } AND A.ACTIVE_STATUS = 'ACTIVE'
+    </select>
+
+    <select id="findStudyGroupNoticeByNoticeId" resultMap="studyGroupNoticeResultMap" parameterType="Long">
+        SELECT
+               A.NOTICE_ID
+             , A.TITLE
+             , A.CONTENT
+             , A.CREATED_AT
+             , A.UPDATED_AT
+             , A.ACTIVE_STATUS
+             , A.GROUP_ID
+          FROM STUDY_GROUP_NOTICE A
+         WHERE A.NOTICE_ID = #{ noticeId } AND A.ACTIVE_STATUS = 'ACTIVE'
+    </select>
+
+</mapper>

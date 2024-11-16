@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studygroup.query.repository.StudyGroupMapper">
+    <resultMap id="studyGroupResultMap" type="com.springcooler.sgma.studygroup.query.dto.StudyGroupDTO">
+        <id property="groupId" column="GROUP_ID"/>
+        <result property="groupName" column="GROUP_NAME"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="groupMembers" column="GROUP_MEMBERS"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="studyGroupCategoryId" column="STUDY_GROUP_CATEGORY_ID"/>
+    </resultMap>
+
+    <resultMap id="myStudyGroupResultMap" type="com.springcooler.sgma.studygroup.query.dto.MyStudyGroupDTO">
+        <id property="groupId" column="GROUP_ID"/>
+        <result property="groupName" column="GROUP_NAME"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="studyGroupCategoryId" column="STUDY_GROUP_CATEGORY_ID"/>
+        <result property="categoryName" column="STUDY_GROUP_CATEGORY_NAME"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="memberEnrolledAt" column="MEMBER_ENROLLED_AT"/>
+        <result property="groupRole" column="GROUP_ROLE"/>
+    </resultMap>
+
+    <select id="findAllStudyGroups" resultMap="studyGroupResultMap">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE'
+         ORDER BY A.GROUP_ID
+    </select>
+
+    <select id="findStudyGroupsByOwnerId" resultMap="studyGroupResultMap" parameterType="Long">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+         WHERE A.USER_ID = #{ ownerId } AND A.ACTIVE_STATUS = 'ACTIVE'
+         ORDER BY A.GROUP_ID
+    </select>
+
+    <select id="findStudyGroupsByParticipantId" resultMap="studyGroupResultMap" parameterType="Long">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+          JOIN STUDY_GROUP_MEMBER B
+            ON A.GROUP_ID = B.GROUP_ID
+         WHERE B.USER_ID = #{ participantId }
+           AND A.ACTIVE_STATUS = 'ACTIVE'
+           AND B.MEMBER_STATUS = 'ACTIVE'
+         ORDER BY A.GROUP_ID
+    </select>
+
+    <select id="findStudyGroupsByCategoryId" resultMap="studyGroupResultMap" parameterType="Integer">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+         WHERE A.STUDY_GROUP_CATEGORY_ID = #{ categoryId } AND A.ACTIVE_STATUS = 'ACTIVE'
+         ORDER BY A.GROUP_ID
+    </select>
+
+    <select id="findStudyGroupByGroupId" resultMap="studyGroupResultMap" parameterType="Long">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+         WHERE A.GROUP_ID = #{ groupId } AND A.ACTIVE_STATUS = 'ACTIVE'
+    </select>
+
+    <select id="findStudyGroupByGroupName" resultMap="studyGroupResultMap" parameterType="string">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.ACTIVE_STATUS
+             , A.GROUP_MEMBERS
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+          FROM STUDY_GROUP A
+         WHERE A.ACTIVE_STATUS = 'ACTIVE' AND A.GROUP_NAME LIKE CONCAT('%', #{ groupName }, '%')
+    </select>
+
+    <select id="findStudyGroupsByUserId" resultMap="myStudyGroupResultMap" parameterType="Long">
+        SELECT
+               A.GROUP_ID
+             , A.GROUP_NAME
+             , A.USER_ID
+             , A.STUDY_GROUP_CATEGORY_ID
+             , B.STUDY_GROUP_CATEGORY_NAME
+             , C.MEMBER_ID
+             , C.MEMBER_ENROLLED_AT
+             , C.GROUP_ROLE
+          FROM STUDY_GROUP A
+          JOIN STUDY_GROUP_CATEGORY B
+            ON A.STUDY_GROUP_CATEGORY_ID = B.STUDY_GROUP_CATEGORY_ID
+          JOIN STUDY_GROUP_MEMBER C
+            ON A.GROUP_ID = C.GROUP_ID
+         WHERE C.USER_ID = #{ userId }
+           AND A.ACTIVE_STATUS = 'ACTIVE'
+           AND C.MEMBER_STATUS = 'ACTIVE'
+         ORDER BY A.GROUP_ID
+    </select>
+</mapper>

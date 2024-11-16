@@ -1,40 +1,18 @@
 ---
 name: Bug report
 about: Something isn't working the way you expect
-title: ""
+title: ''
 labels: bug
-assignees: ""
+assignees: ''
+
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# 🧑‍💻 오늘의 개발하면서 생긴 크고 작은 이슈사항을 기록해주세요
 
-**To Reproduce**
-Steps to reproduce the behavior:
-
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots and Source**
-If applicable, add screenshots to help explain your problem.
-
-You can help speed up fixing the problem by either
-
-1. providing a simple reproduction
-2. linking to your Quartz repository where the problem can be observed
-
-**Desktop (please complete the following information):**
+## ❤️ 어떤 버그인가요?
 
 
-- `java` Version: [e.g. v17.03.6]
-- `spring-boot` version: [e.g. v10.1.0]
-- IDE: 
-- Browser [e.g. chrome, safari]
-
-**Additional context**
-Add any other context about the problem here.
+##  🚧 수정 사항 🚧
+- [ ] 
+- [ ] 
+- [ ]

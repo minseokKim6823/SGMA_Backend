@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.springcooler.sgma.choice.command.application.service.AppChoiceServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-09-04T08:25:29" hostname="DESKTOP-JUHMSD5" time="0.547">
+  <properties/>
+  <testcase name="선지 수정 테스트" classname="com.springcooler.sgma.choice.command.application.service.AppChoiceServiceTests" time="0.547"/>
+  <system-out><![CDATA[17:25:16.057 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.springcooler.sgma.choice.command.application.service.AppChoiceServiceTests]: AppChoiceServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:25:16.290 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.springcooler.sgma.SgmaApplication for test class com.springcooler.sgma.choice.command.application.service.AppChoiceServiceTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2024-09-04T17:25:16.862+09:00  INFO 5728 --- [    Test worker] c.s.s.c.c.a.s.AppChoiceServiceTests      : Starting AppChoiceServiceTests using Java 17.0.2 with PID 5728 (started by User in C:\Users\User\Desktop\kibeom\SGMA)
+2024-09-04T17:25:16.864+09:00  INFO 5728 --- [    Test worker] c.s.s.c.c.a.s.AppChoiceServiceTests      : No active profile set, falling back to 1 default profile: "default"
+2024-09-04T17:25:18.377+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 7 ms.
+2024-09-04T17:25:18.385+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-09-04T17:25:18.385+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-09-04T17:25:18.409+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobRepository already defined in the application context, skipping the registration of a jobRepository
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobExplorer already defined in the application context, skipping the registration of a jobExplorer
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobLauncher already defined in the application context, skipping the registration of a jobLauncher
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobRegistry already defined in the application context, skipping the registration of a jobRegistry
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobRegistryBeanPostProcessor already defined in the application context, skipping the registration of a jobRegistryBeanPostProcessor
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Bean jobOperator already defined in the application context, skipping the registration of a jobOperator
+2024-09-04T17:25:18.417+09:00  INFO 5728 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+2024-09-04T17:25:19.144+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-09-04T17:25:19.144+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-04T17:25:19.550+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 395 ms. Found 14 JPA repository interfaces.
+2024-09-04T17:25:19.561+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-09-04T17:25:19.561+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-09-04T17:25:19.593+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.choice.command.domain.repository.ChoiceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.593+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.problem.command.domain.repository.ProblemRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.593+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.recruitmentboardcomment.command.domain.repository.RecruitmentBoardCommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.593+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.recruitmentboardreply.command.domain.repository.RecruitmentBoardReplyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.593+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.recruitmentboard.command.domain.repository.RecruitmentBoardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.606+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studygroupapplicant.command.domain.repository.StudyGroupApplicantRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.606+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studygroupcategory.command.domain.repository.StudyGroupCategoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.606+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studygroupmember.command.domain.repository.StudyGroupMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.606+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studygroupnotice.command.domain.repository.StudyGroupNoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studygroup.command.domain.repository.StudyGroupRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studyscheduleparticipant.command.domain.repository.StudyScheduleParticipantRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.studyschedule.command.domain.repository.StudyScheduleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.submittedanswer.command.domain.repository.SubmittedAnswerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.springcooler.sgma.user.command.domain.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2024-09-04T17:25:19.608+09:00  INFO 5728 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 0 Redis repository interfaces.
+2024-09-04T17:25:20.476+09:00  WARN 5728 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'jobRegistry' of type [org.springframework.batch.core.configuration.support.MapJobRegistry] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [jobRegistryBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-04T17:25:20.819+09:00  INFO 5728 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-04T17:25:20.999+09:00  INFO 5728 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@5d3f8661
+2024-09-04T17:25:21.005+09:00  INFO 5728 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-04T17:25:21.083+09:00  INFO 5728 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-04T17:25:21.210+09:00  INFO 5728 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-04T17:25:21.283+09:00  INFO 5728 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-04T17:25:21.655+09:00  INFO 5728 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-04T17:25:21.704+09:00  WARN 5728 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-09-04T17:25:22.131+09:00  WARN 5728 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.springcooler.sgma.choice.command.domain.aggregate.entity.ChoicePK
+2024-09-04T17:25:22.131+09:00  WARN 5728 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.springcooler.sgma.choice.command.domain.aggregate.entity.ChoicePK
+2024-09-04T17:25:22.954+09:00  INFO 5728 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-04T17:25:22.954+09:00  INFO 5728 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04T17:25:24.178+09:00  INFO 5728 --- [    Test worker] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MARIADB
+2024-09-04T17:25:24.210+09:00  INFO 5728 --- [    Test worker] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2024-09-04T17:25:24.947+09:00  INFO 5728 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-04T17:25:27.055+09:00  WARN 5728 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-04T17:25:27.128+09:00  INFO 5728 --- [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userCommandServiceImpl
+2024-09-04T17:25:28.129+09:00  INFO 5728 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2024-09-04T17:25:29.233+09:00  INFO 5728 --- [    Test worker] c.s.s.c.c.a.s.AppChoiceServiceTests      : Started AppChoiceServiceTests in 12.76 seconds (process running for 14.406)
+2024-09-04T17:25:29.321+09:00  INFO 5728 --- [   scheduling-1] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=myJob]] launched with the following parameters: [{}]
+2024-09-04T17:25:29.356+09:00  INFO 5728 --- [   scheduling-1] o.s.batch.core.job.SimpleStepHandler     : Executing step: [myStep]
+Hibernate: 
+    select
+        rb1_0.recruitment_board_id,
+        rb1_0.active_status,
+        rb1_0.content,
+        rb1_0.created_at,
+        rb1_0.group_id,
+        rb1_0.likes,
+        rb1_0.recruitment_end_time,
+        rb1_0.recruitment_start_time,
+        rb1_0.study_group_category_id,
+        rb1_0.title,
+        rb1_0.updated_at 
+    from
+        recruitment_board rb1_0 
+    where
+        rb1_0.active_status=?
+2024-09-04T17:25:29.540+09:00  INFO 5728 --- [   scheduling-1] o.s.batch.core.step.AbstractStep         : Step: [myStep] executed in 183ms
+2024-09-04T17:25:29.553+09:00  INFO 5728 --- [   scheduling-1] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=myJob]] completed with the following parameters: [{}] and the following status: [COMPLETED] in 220ms
+Hibernate: 
+    select
+        c1_0.choice_num,
+        c1_0.problem_id,
+        c1_0.content 
+    from
+        choice c1_0 
+    where
+        (
+            c1_0.choice_num, c1_0.problem_id
+        ) in ((?, ?))
+Hibernate: 
+    update
+        choice 
+    set
+        content=? 
+    where
+        choice_num=? 
+        and problem_id=?
+2024-09-04T17:25:29.792+09:00  INFO 5728 --- [    Test worker] c.s.s.c.c.a.s.AppChoiceServiceTests      : modifiedChoice: ChoiceDTO(problemId=1, choiceNum=1, content=선지 수정 테스트)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

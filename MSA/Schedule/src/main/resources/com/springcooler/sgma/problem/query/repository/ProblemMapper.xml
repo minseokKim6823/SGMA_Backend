@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.problem.query.repository.ProblemMapper">
+
+    <resultMap id="problemResultMap" type="com.springcooler.sgma.problem.query.dto.ProblemDTO">
+        <id property="problemId" column="problem_id"/>
+        <result property="participantId" column="participant_id"/>
+        <result property="scheduleId" column="schedule_id"/>
+        <result property="content" column="problem_content"/>
+        <result property="answer" column="answer"></result>
+        <result property="problemType" column="problem_type"></result>
+        <collection property="choices" resultMap="choiceResultMap"></collection>
+    </resultMap>
+
+    <resultMap id="choiceResultMap" type="com.springcooler.sgma.choice.query.dto.ChoiceDTO">
+        <id property="problemId" column="problem_id"/>
+        <id property="choiceNum" column="choice_num"/>
+        <!--    같은 이름의 Column의 충돌을 피하기 위해 Alias 사용  -->
+        <result property="content" column="CHOICE_CONTENT"/>
+    </resultMap>
+
+    <select id="findAllProblems" resultMap="problemResultMap">
+        SELECT
+        A.PROBLEM_ID
+        ,A.CONTENT AS PROBLEM_CONTENT
+        ,A.ANSWER
+        ,A.PROBLEM_TYPE
+        ,A.PARTICIPANT_ID
+        ,A.SCHEDULE_ID
+        <if test="problem_type = 'MULTIPLE'">
+            ,B.CHOICE_NUM
+            ,B.content as CHOICE_CONTENT
+        </if>
+        FROM PROBLEM A
+        <if test="problem_type = 'MULTIPLE'">
+            -- 주관식의 경우 choice에 매칭되지 않아도 조회할 수 있도록 LEFT JOIN 사용
+            LEFT JOIN CHOICE B ON A.PROBLEM_ID = B.PROBLEM_ID
+        </if>
+    </select>
+
+    <select id="findProblemById" resultMap="problemResultMap" parameterType="long">
+        SELECT
+        A.PROBLEM_ID
+        ,A.CONTENT AS PROBLEM_CONTENT
+        ,A.ANSWER
+        ,A.PROBLEM_TYPE
+        ,A.PARTICIPANT_ID
+        ,A.SCHEDULE_ID
+        <if test="problem_type = 'MULTIPLE'">
+            ,B.CHOICE_NUM
+            ,B.content as CHOICE_CONTENT
+        </if>
+        FROM PROBLEM A
+        <if test="problem_type = 'MULTIPLE'">
+            -- 주관식의 경우 choice에 매칭되지 않아도 조회할 수 있도록 LEFT JOIN 사용
+            LEFT JOIN CHOICE B ON A.PROBLEM_ID = B.PROBLEM_ID
+        </if>
+        WHERE A.PROBLEM_ID = #{ id }
+    </select>
+
+    <select id="findProblemsByScheduleId" resultMap="problemResultMap" parameterType="long">
+        SELECT
+        A.PROBLEM_ID
+        ,A.CONTENT AS PROBLEM_CONTENT
+        ,A.ANSWER
+        ,A.PROBLEM_TYPE
+        ,A.PARTICIPANT_ID
+        ,A.SCHEDULE_ID
+        <if test="problem_type = 'MULTIPLE'">
+            ,B.CHOICE_NUM
+            ,B.content as CHOICE_CONTENT
+        </if>
+        FROM PROBLEM A
+        <if test="problem_type = 'MULTIPLE'">
+            -- 주관식의 경우 choice에 매칭되지 않아도 조회할 수 있도록 LEFT JOIN 사용
+            LEFT JOIN CHOICE B ON A.PROBLEM_ID = B.PROBLEM_ID
+        </if>
+        WHERE A.SCHEDULE_ID = #{ scheduleId }
+    </select>
+
+
+
+</mapper>

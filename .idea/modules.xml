@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Recruitment.sgma.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Recruitment.sgma.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SGMA_Backend.iml" filepath="$PROJECT_DIR$/.idea/SGMA_Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/User.sgma.main.iml" filepath="$PROJECT_DIR$/.idea/modules/User.sgma.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.springcooler.sgma.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.springcooler.sgma.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sgma.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sgma.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sgma.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sgma.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sgma_gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sgma_gateway.main.iml" />
+    </modules>
+  </component>
+</project>

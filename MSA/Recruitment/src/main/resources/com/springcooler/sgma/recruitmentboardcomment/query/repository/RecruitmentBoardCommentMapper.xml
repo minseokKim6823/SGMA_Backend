@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.recruitmentboardcomment.query.repository.RecruitmentBoardCommentMapper">
+
+    <resultMap id="studyGroupRecruitmentComment" type="com.springcooler.sgma.recruitmentboardcomment.query.dto.RecruitmentBoardCommentDTO">
+        <id property="recruitmentBoardCommentId" column="RECRUITMENT_BOARD_COMMENT_ID"/>
+        <result property="content" column="CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="anonymousStatus" column="ANONYMOUS_STATUS"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="recruitmentBoardId" column="RECRUITMENT_BOARD_ID"/>
+        <result property="userNickname" column="USER_NICKNAME"/>
+    </resultMap>
+
+    <select id="findStudyGroupRecruitmentCommentByBoardId" resultMap="studyGroupRecruitmentComment">
+        SELECT
+        A.RECRUITMENT_BOARD_COMMENT_ID,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.ACTIVE_STATUS,
+        A.ANONYMOUS_STATUS,
+        A.USER_ID,
+        A.RECRUITMENT_BOARD_ID,
+        U.NICKNAME AS USER_NICKNAME
+        FROM RECRUITMENT_BOARD_COMMENT A
+        LEFT JOIN USER U ON A.USER_ID = U.USER_ID
+        WHERE A.ACTIVE_STATUS = 'ACTIVE'
+        AND A.RECRUITMENT_BOARD_ID = #{ recruitmentBoardId }
+        ORDER BY A.RECRUITMENT_BOARD_COMMENT_ID;
+    </select>
+</mapper>

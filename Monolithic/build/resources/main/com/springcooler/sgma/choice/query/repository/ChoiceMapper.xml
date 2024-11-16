@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.choice.query.repository.ChoiceMapper">
+
+    <resultMap id="choiceResultMap" type="com.springcooler.sgma.choice.query.dto.ChoiceDTO">
+        <id property="problemId" column="problem_id"/>
+        <id property="choiceNum" column="choice_num"/>
+        <result property="content" column="content"></result>
+    </resultMap>
+
+    <select id="findAllChoices" resultMap="choiceResultMap">
+        SELECT
+                A.PROBLEM_ID
+               ,A.CHOICE_NUM
+               ,A.CONTENT
+        FROM CHOICE A
+    </select>
+
+    <select id="findChoicesByProblemId" resultMap="choiceResultMap">
+        SELECT      A.PROBLEM_ID
+                   ,A.CHOICE_NUM
+                   ,A.CONTENT
+          FROM      CHOICE A
+         WHERE      A.PROBLEM_ID = #{ problemId }
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.recruitmentboardreply.query.repository.RecruitmentBoardReplyMapper">
+
+    <resultMap id="recruitmentBoardReply1" type="RecruitmentBoardReplyDTO">
+        <id property="recruitmentBoardReplyId" column="RECRUITMENT_BOARD_REPLY_ID"/>
+        <result property="content" column="CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+        <result property="anonymousStatus" column="ANONYMOUS_STATUS"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="recruitmentBoardCommentId" column="RECRUITMENT_BOARD_COMMENT_ID"/>
+    </resultMap>
+
+    <resultMap id="recruitmentBoardReply2" type="RecruitmentBoardReplyDTO" extends="recruitmentBoardReply1">
+        <result property="activeStatus" column="ACTIVE_STATUS"/>
+    </resultMap>
+
+    <select id="recruitmentBoardReplyDTO" resultMap="recruitmentBoardReply2">
+        SELECT
+        A.RECRUITMENT_BOARD_REPLY_ID,
+        A.CONTENT,
+        A.CREATED_AT,
+        A.UPDATED_AT,
+        A.ACTIVE_STATUS,
+        A.ANONYMOUS_STATUS,
+        A.USER_ID,
+        A.RECRUITMENT_BOARD_COMMENT_ID
+        FROM RECRUITMENT_BOARD_REPLY A
+        WHERE A.ACTIVE_STATUS = 'ACTIVE'
+    </select>
+</mapper>

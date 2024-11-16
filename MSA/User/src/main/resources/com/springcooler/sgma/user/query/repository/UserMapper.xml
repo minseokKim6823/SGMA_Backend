@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springcooler.sgma.user.query.repository.UserMapper">
+
+    <!-- 사용자 ID로 조회 -->
+    <select id="findByUserId" parameterType="Long" resultType="com.springcooler.sgma.user.query.dto.UserDTO">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            password,
+            nickname,
+            email,
+            user_auth_id AS userAuthId,
+            user_status AS userStatus,
+            created_at AS createdAt,
+            withdrawn_at AS withdrawnAt,
+            profile_image AS profileImage,
+            accept_status AS acceptStatus,
+            signup_path AS signupPath,
+            user_identifier AS userIdentifier
+        FROM USER
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 사용자 닉네임으로 조회 -->
+    <select id="findByNickname" parameterType="String" resultType="com.springcooler.sgma.user.query.dto.UserDTO">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            password,
+            nickname,
+            email,
+            user_auth_id AS userAuthId,
+            user_status AS userStatus,
+            created_at AS createdAt,
+            withdrawn_at AS withdrawnAt,
+            profile_image AS profileImage,
+            accept_status AS acceptStatus,
+            signup_path AS signupPath,
+            user_identifier AS userIdentifier
+        FROM USER
+        WHERE nickname = #{nickname}
+    </select>
+
+    <!-- 사용자 userIdentifier로 조회 -->
+    <select id="findByUserIdentifier" parameterType="String" resultType="com.springcooler.sgma.user.query.dto.UserDTO">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            password,
+            nickname,
+            email,
+            user_auth_id AS userAuthId,
+            user_status AS userStatus,
+            created_at AS createdAt,
+            withdrawn_at AS withdrawnAt,
+            profile_image AS profileImage,
+            accept_status AS acceptStatus,
+            signup_path AS signupPath,
+            user_identifier AS userIdentifier
+        FROM USER
+        WHERE user_identifier = #{userIdentifier}
+    </select>
+
+    <!-- 사용자 닉네임, 가입 경로, 이메일로 조회 -->
+    <select id="findByNicknameAndSignupPathAndEmail" parameterType="map" resultType="com.springcooler.sgma.user.query.dto.UserDTO">
+        SELECT
+            user_id AS userId,
+            user_name AS userName,
+            password,
+            nickname,
+            email,
+            user_auth_id AS userAuthId,
+            user_status AS userStatus,
+            created_at AS createdAt,
+            withdrawn_at AS withdrawnAt,
+            profile_image AS profileImage,
+            accept_status AS acceptStatus,
+            signup_path AS signupPath,
+            user_identifier AS userIdentifier
+        FROM USER
+        WHERE nickname = #{nickname}
+          AND signup_path = #{signupPath}
+          AND email = #{email}
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.submittedanswer.query.repository.SubmittedAnswerMapper">
+    <resultMap id="submittedAnswerResultMap" type="com.springcooler.sgma.submittedanswer.query.dto.SubmittedAnswerDTO">
+        <id property="problemId" column="problem_id"/>
+        <id property="participantId" column="participant_id"/>
+        <result property="submittedAnswer" column="submitted_answer"/>
+        <result property="answerStatus" column="answer_status"/>
+    </resultMap>
+
+    <select id="findAllSubmittedAnswers" resultMap="submittedAnswerResultMap">
+        SELECT
+                    A.PROBLEM_ID
+                   ,A.PARTICIPANT_ID
+                   ,A.SUBMITTED_ANSWER
+                   ,A.ANSWER_STATUS
+          FROM SUBMITTED_ANSWER A
+    </select>
+    <select id="findSubmittedAnswersByProblemId" resultMap="submittedAnswerResultMap" parameterType="long">
+        SELECT
+                    A.PROBLEM_ID
+                   ,A.PARTICIPANT_ID
+                   ,A.SUBMITTED_ANSWER
+                   ,A.ANSWER_STATUS
+          FROM SUBMITTED_ANSWER A
+         WHERE A.PROBLEM_ID = #{ problemId }
+
+    </select>
+
+    <select id="findSubmittedAnswersByParticipantId" resultMap="submittedAnswerResultMap" parameterType="long">
+        SELECT
+                    A.PROBLEM_ID
+                   ,A.PARTICIPANT_ID
+                   ,A.SUBMITTED_ANSWER
+                   ,A.ANSWER_STATUS
+          FROM      SUBMITTED_ANSWER A
+         WHERE      A.PARTICIPANT_ID = #{ participantId }
+    </select>
+
+
+
+</mapper>

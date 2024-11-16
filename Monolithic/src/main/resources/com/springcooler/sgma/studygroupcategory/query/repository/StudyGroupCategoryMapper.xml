@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcooler.sgma.studygroupcategory.query.repository.StudyGroupCategoryMapper">
+    <resultMap id="studyGroupCategoryResultMap" type="com.springcooler.sgma.studygroupcategory.query.dto.StudyGroupCategoryDTO">
+        <id property="categoryId" column="STUDY_GROUP_CATEGORY_ID"/>
+        <result property="categoryName" column="STUDY_GROUP_CATEGORY_NAME"/>
+    </resultMap>
+
+    <select id="findAllStudyGroupCategories" resultMap="studyGroupCategoryResultMap">
+        SELECT
+               A.STUDY_GROUP_CATEGORY_ID
+             , A.STUDY_GROUP_CATEGORY_NAME
+          FROM STUDY_GROUP_CATEGORY A
+         ORDER BY A.STUDY_GROUP_CATEGORY_ID
+    </select>
+
+    <select id="findStudyGroupCategoryByCategoryId" resultMap="studyGroupCategoryResultMap" parameterType="Integer">
+        SELECT
+               A.STUDY_GROUP_CATEGORY_ID
+             , A.STUDY_GROUP_CATEGORY_NAME
+          FROM STUDY_GROUP_CATEGORY A
+         WHERE A.STUDY_GROUP_CATEGORY_ID = #{ categoryId }
+         ORDER BY A.STUDY_GROUP_CATEGORY_ID
+    </select>
+
+</mapper>
